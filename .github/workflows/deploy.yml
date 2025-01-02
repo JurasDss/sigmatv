@@ -27,3 +27,4 @@ jobs:
       with:
         branch: gh-pages  # Branch to deploy to
         folder: .  # Folder containing your static files
+        token: ${{ secrets.GH_TOKEN }}  # Use the token for authentication
