@@ -42,21 +42,20 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 
-<script>
-  // Firebase Configuration - Replaced by GitHub Actions
-  const firebaseConfig = {
-    apiKey: "AIzaSyDw3sNjaYYyHx41bvTOKIFyZxBgPUe5HOY",
-    authDomain: "streamintegration-929c8.firebaseapp.com",
-    projectId: "streamintegration-929c8",
-    storageBucket: "streamintegration-929c8.firebasestorage.app",
-    messagingSenderId: "510142365899",
-    appId: "1:510142365899:web:18e3426529d5bfafee1b4e"
-  };
+  <script>
+    // Firebase Configuration (replace these with your actual Firebase config)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDw3sNjaYYyHx41bvTOKIFyZxBgPUe5HOY",
+      authDomain: "streamintegration-929c8.firebaseapp.com",
+      projectId: "streamintegration-929c8",
+      storageBucket: "streamintegration-929c8.firebasestorage.app",
+      messagingSenderId: "510142365899",
+      appId: "1:510142365899:web:18e3426529d5bfafee1b4e"
+    };
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-</script>
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
     // Fetch the video ID from Firestore
     db.collection('videos').doc('current').get().then((doc) => {
@@ -81,6 +80,7 @@
     });
 
     // YouTube Iframe API callback: must be global
+    var player;
     function onYouTubeIframeAPIReady() {
       // Define the player
       db.collection('videos').doc('current').get().then((doc) => {
@@ -120,14 +120,12 @@
       console.error("Error loading video: ", event.data);
       document.getElementById('offline-message').style.display = 'flex';
     }
+
+    // Prevent right-click context menu (Inspect element block)
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
   </script>
-
-<script>
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-</script>
-
 
 </body>
 </html>
