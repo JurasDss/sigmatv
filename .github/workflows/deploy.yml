@@ -31,7 +31,7 @@ jobs:
         sed -i 's|YOUR_APP_ID|${{ secrets.FIREBASE_APP_ID }}|' index.html
 
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4.1.0
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages  # Branch to deploy to
         folder: .  # Folder containing your static files
