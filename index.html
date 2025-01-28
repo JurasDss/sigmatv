@@ -60,10 +60,11 @@
     </div>
 
     <script>
-      const commentInput = document.getElementById('commentInput');
+const commentInput = document.getElementById('commentInput');
 const postCommentButton = document.getElementById('postCommentButton');
 const commentsSection = document.getElementById('commentsSection');
-const API_URL = 'http://localhost:3000/comments'; // Backend URL
+
+const API_URL = 'http://localhost:3000/comments';
 
 // Load comments from the backend
 const loadComments = async () => {
@@ -91,24 +92,26 @@ const loadComments = async () => {
     }
 };
 
-// Save a new comment to the backend
-const saveComment = async (username, text) => {
+// Post a new comment to the backend
+const postComment = async (username, text) => {
     try {
         await fetch(API_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({ username, text }),
         });
         loadComments();
     } catch (error) {
-        console.error('Error saving comment:', error);
+        console.error('Error posting comment:', error);
     }
 };
 
 postCommentButton.addEventListener('click', () => {
     const commentText = commentInput.value.trim();
     if (commentText) {
-        saveComment('Anonymous', commentText);
+        postComment('Anonymous', commentText);
         commentInput.value = '';
     }
 });
