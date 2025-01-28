@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
+    <title>Enhanced Video Player</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-r from-purple-700 via-blue-500 to-purple-700 text-white min-h-screen flex items-center justify-center">
@@ -12,6 +12,8 @@
         <div class="relative mb-6">
             <video id="videoPlayer" class="w-full rounded-lg" controls>
                 <source id="videoSource" src="sample-video.mp4" type="video/mp4">
+                <source src="sample-video.webm" type="video/webm">
+                <source src="sample-video.ogg" type="video/ogg">
                 Your browser does not support the video tag.
             </video>
             <div class="absolute top-4 left-4 bg-blue-600 text-white py-1 px-2 rounded">Now Playing</div>
@@ -19,12 +21,10 @@
 
         <!-- Episode Selector -->
         <div class="mb-6">
-            <h2 class="text-xl font-semibold mb-2">Episode Selector</h2>
-            <select id="episodeSelector" class="w-full p-2 border rounded-lg bg-gray-100 text-gray-800">
-                <option value="sample-video.mp4">Episode 1: The Beginning</option>
-                <option value="sample-video2.mp4">Episode 2: The Adventure Continues</option>
-                <option value="sample-video3.mp4">Episode 3: The Final Showdown</option>
-            </select>
+            <h2 class="text-xl font-semibold mb-2">Episodes</h2>
+            <div id="episodeList" class="space-y-4">
+                <!-- Episodes will be dynamically added here -->
+            </div>
         </div>
 
         <!-- Rating System -->
@@ -60,15 +60,41 @@
     </div>
 
     <script>
-        // Episode Selector Functionality
-        const episodeSelector = document.getElementById('episodeSelector');
+        // Define episodes with their details
+        const episodes = [
+            { value: 'sample-video.mp4', label: 'Episode 1: The Beginning', thumbnail: 'thumbnail1.jpg' },
+            { value: 'sample-video2.mp4', label: 'Episode 2: The Adventure Continues', thumbnail: 'thumbnail2.jpg' },
+            { value: 'sample-video3.mp4', label: 'Episode 3: The Final Showdown', thumbnail: 'thumbnail3.jpg' },
+        ];
+
         const videoPlayer = document.getElementById('videoPlayer');
         const videoSource = document.getElementById('videoSource');
+        const episodeList = document.getElementById('episodeList');
 
-        episodeSelector.addEventListener('change', (event) => {
-            videoSource.src = event.target.value;
-            videoPlayer.load();
-            videoPlayer.play();
+        // Populate episode list dynamically
+        episodes.forEach(episode => {
+            const episodeItem = document.createElement('div');
+            episodeItem.classList.add('flex', 'items-center', 'space-x-4', 'p-2', 'border', 'rounded-lg', 'cursor-pointer', 'hover:bg-gray-100');
+
+            const thumbnail = document.createElement('img');
+            thumbnail.src = episode.thumbnail; // Replace with actual thumbnail paths
+            thumbnail.alt = episode.label;
+            thumbnail.classList.add('w-16', 'h-16', 'rounded-lg');
+
+            const episodeDetails = document.createElement('div');
+            episodeDetails.textContent = episode.label;
+
+            episodeItem.appendChild(thumbnail);
+            episodeItem.appendChild(episodeDetails);
+
+            episodeList.appendChild(episodeItem);
+
+            // Add click event to play the selected video
+            episodeItem.addEventListener('click', () => {
+                videoSource.src = episode.value;
+                videoPlayer.load();
+                videoPlayer.play();
+            });
         });
 
         // Comment Section Functionality
