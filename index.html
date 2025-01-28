@@ -60,65 +60,43 @@
     </div>
 
     <script>
-const commentInput = document.getElementById('commentInput');
-const postCommentButton = document.getElementById('postCommentButton');
-const commentsSection = document.getElementById('commentsSection');
+        // Episode Selector Functionality
+        const episodeSelector = document.getElementById('episodeSelector');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoSource = document.getElementById('videoSource');
 
-const API_URL = 'http://localhost:3000/comments';
-
-// Load comments from the backend
-const loadComments = async () => {
-    try {
-        const response = await fetch(API_URL);
-        const comments = await response.json();
-        commentsSection.innerHTML = '';
-        comments.forEach(({ username, text }) => {
-            const commentDiv = document.createElement('div');
-            commentDiv.classList.add('p-4', 'bg-gray-100', 'rounded-lg');
-
-            const userName = document.createElement('p');
-            userName.classList.add('font-semibold');
-            userName.textContent = username;
-
-            const commentContent = document.createElement('p');
-            commentContent.textContent = text;
-
-            commentDiv.appendChild(userName);
-            commentDiv.appendChild(commentContent);
-            commentsSection.appendChild(commentDiv);
+        episodeSelector.addEventListener('change', (event) => {
+            videoSource.src = event.target.value;
+            videoPlayer.load();
+            videoPlayer.play();
         });
-    } catch (error) {
-        console.error('Error loading comments:', error);
-    }
-};
 
-// Post a new comment to the backend
-const postComment = async (username, text) => {
-    try {
-        await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, text }),
+        // Comment Section Functionality
+        const commentInput = document.getElementById('commentInput');
+        const postCommentButton = document.getElementById('postCommentButton');
+        const commentsSection = document.getElementById('commentsSection');
+
+        postCommentButton.addEventListener('click', () => {
+            const commentText = commentInput.value.trim();
+
+            if (commentText) {
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('p-4', 'bg-gray-100', 'rounded-lg');
+
+                const userName = document.createElement('p');
+                userName.classList.add('font-semibold');
+                userName.textContent = 'Anonymous';
+
+                const commentContent = document.createElement('p');
+                commentContent.textContent = commentText;
+
+                commentDiv.appendChild(userName);
+                commentDiv.appendChild(commentContent);
+                commentsSection.appendChild(commentDiv);
+
+                commentInput.value = '';
+            }
         });
-        loadComments();
-    } catch (error) {
-        console.error('Error posting comment:', error);
-    }
-};
-
-postCommentButton.addEventListener('click', () => {
-    const commentText = commentInput.value.trim();
-    if (commentText) {
-        postComment('Anonymous', commentText);
-        commentInput.value = '';
-    }
-});
-
-// Initial load of comments
-loadComments();
-
     </script>
 </body>
 </html>
