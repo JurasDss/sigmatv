@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Video Player</title>
+    <title>Enhanced Video Player with Rating</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-r from-purple-700 via-blue-500 to-purple-700 text-white min-h-screen flex items-center justify-center">
@@ -30,13 +30,14 @@
         <!-- Rating System -->
         <div class="mb-6">
             <h2 class="text-xl font-semibold mb-2">Rate this Episode</h2>
-            <div class="flex space-x-2">
-                <button class="text-yellow-500 hover:text-yellow-600">★</button>
-                <button class="text-yellow-500 hover:text-yellow-600">★</button>
-                <button class="text-yellow-500 hover:text-yellow-600">★</button>
-                <button class="text-gray-400 hover:text-yellow-600">★</button>
-                <button class="text-gray-400 hover:text-yellow-600">★</button>
+            <div id="ratingStars" class="flex space-x-2">
+                <button data-rating="1" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="2" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="3" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="4" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="5" class="text-gray-400 hover:text-yellow-600">★</button>
             </div>
+            <p id="currentRating" class="mt-2 text-sm text-gray-600">No rating yet.</p>
         </div>
 
         <!-- Comment Section -->
@@ -70,6 +71,8 @@
         const videoPlayer = document.getElementById('videoPlayer');
         const videoSource = document.getElementById('videoSource');
         const episodeList = document.getElementById('episodeList');
+        const ratingStars = document.getElementById('ratingStars');
+        const currentRatingText = document.getElementById('currentRating');
 
         // Populate episode list dynamically
         episodes.forEach(episode => {
@@ -94,7 +97,40 @@
                 videoSource.src = episode.value;
                 videoPlayer.load();
                 videoPlayer.play();
+                resetRating(); // Reset the rating when switching episodes
             });
+        });
+
+        // Rating system functionality
+        let currentRating = 0;
+
+        const resetRating = () => {
+            currentRating = 0;
+            Array.from(ratingStars.children).forEach(star => {
+                star.classList.remove('text-yellow-500');
+                star.classList.add('text-gray-400');
+            });
+            currentRatingText.textContent = 'No rating yet.';
+        };
+
+        ratingStars.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                currentRating = parseInt(event.target.dataset.rating, 10);
+
+                // Update the stars' appearance
+                Array.from(ratingStars.children).forEach(star => {
+                    if (parseInt(star.dataset.rating, 10) <= currentRating) {
+                        star.classList.remove('text-gray-400');
+                        star.classList.add('text-yellow-500');
+                    } else {
+                        star.classList.remove('text-yellow-500');
+                        star.classList.add('text-gray-400');
+                    }
+                });
+
+                // Update the current rating text
+                currentRatingText.textContent = `You rated this episode ${currentRating} star${currentRating > 1 ? 's' : ''}.`;
+            }
         });
 
         // Comment Section Functionality
@@ -126,3 +162,4 @@
     </script>
 </body>
 </html>
+
