@@ -7,6 +7,7 @@
 *.json filter=lfs diff=lfs merge=lfs -text
 /Mashle[[:space:]]S2/1 filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
 *.mkv filter=lfs diff=lfs merge=lfs -text
 *png filter=lfs diff=lfs merge=lfs -text
 *jpg filter=lfs diff=lfs merge=lfs -text
