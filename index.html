@@ -66,11 +66,11 @@
     </div>
 
     <script>
-        // Define episodes with their details
+        // Define episodes with their details and a flag to disable the third episode
         const episodes = [
             { value: 'sample-video.mp4', label: 'Episode 1: The Beginning', thumbnail: 'thumbnail1.jpg' },
             { value: 'sample-video2.mp4', label: 'Episode 2: The Adventure Continues', thumbnail: 'thumbnail2.jpg' },
-            { value: 'sample-video3.mp4', label: 'Episode 3: The Final Showdown - [SOON!]', thumbnail: 'thumbnail3.jpg' },
+            { value: 'sample-video3.mp4', label: 'Episode 3: The Final Showdown - [SOON!]', thumbnail: 'thumbnail3.jpg', disabled: true }, // Disable third episode
         ];
 
         const videoPlayer = document.getElementById('videoPlayer');
@@ -80,9 +80,14 @@
         const currentRatingText = document.getElementById('currentRating');
 
         // Populate episode list dynamically
-        episodes.forEach(episode => {
+        episodes.forEach((episode, index) => {
             const episodeItem = document.createElement('div');
             episodeItem.classList.add('flex', 'items-center', 'space-x-4', 'p-2', 'border', 'rounded-lg', 'cursor-pointer', 'hover:bg-gray-100');
+
+            // Apply red hue and disable the third button
+            if (episode.disabled) {
+                episodeItem.classList.add('bg-red-500', 'cursor-not-allowed');
+            }
 
             const thumbnail = document.createElement('img');
             thumbnail.src = episode.thumbnail; // Replace with actual thumbnail paths
@@ -97,13 +102,15 @@
 
             episodeList.appendChild(episodeItem);
 
-            // Add click event to play the selected video
-            episodeItem.addEventListener('click', () => {
-                videoSource.src = episode.value;
-                videoPlayer.load();
-                videoPlayer.play();
-                resetRating(); // Reset the rating when switching episodes
-            });
+            // Add click event to play the selected video if not disabled
+            if (!episode.disabled) {
+                episodeItem.addEventListener('click', () => {
+                    videoSource.src = episode.value;
+                    videoPlayer.load();
+                    videoPlayer.play();
+                    resetRating(); // Reset the rating when switching episodes
+                });
+            }
         });
 
         // Rating system functionality
@@ -167,4 +174,3 @@
     </script>
 </body>
 </html>
-
