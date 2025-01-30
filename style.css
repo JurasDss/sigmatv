@@ -1,0 +1,151 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.button {
+  position: relative;
+  padding: 1.5rem 3rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(128, 0, 128, 0.3);
+  border: 2px solid #ff00ff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.button-text {
+  position: relative;
+  z-index: 3;
+  text-shadow: 0 0 10px #ff00ff;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.button-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,0,255,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.button-circuit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.button:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 0 20px rgba(255,0,255,0.5),
+    0 0 40px rgba(255,0,255,0.3),
+    0 0 60px rgba(255,0,255,0.1);
+  background: rgba(128, 0, 128, 0.5);
+}
+
+.button:hover .button-glow {
+  opacity: 1;
+}
+
+.button:active {
+  transform: translateY(0) scale(0.95);
+}
+
+@keyframes circuit-flow {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(20px);
+  }
+}
+
+.button:hover .button-circuit {
+  animation: circuit-flow 1s linear infinite;
+}
+
+.secret-input-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 2;
+}
+
+#secretInput {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  background: rgba(128, 0, 128, 0.3);
+  border: 2px solid #ff00ff;
+  border-radius: 8px;
+  color: #fff;
+  outline: none;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+#secretInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#secretInput:focus {
+  box-shadow: 0 0 20px rgba(255,0,255,0.3);
+}
+
+.submit-button {
+  position: relative;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background: rgba(128, 0, 128, 0.3);
+  border: 2px solid #ff00ff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 0 20px rgba(255,0,255,0.5),
+    0 0 40px rgba(255,0,255,0.3);
+  background: rgba(128, 0, 128, 0.5);
+}
