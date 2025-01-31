@@ -16,8 +16,7 @@
                 <source src="sample-video.webm" type="video/webm">
                 <source src="sample-video.ogg" type="video/ogg">
                 <source src="sample-video.mkv" type="video/mkv">
-				   <!-- Add subtitle tracks -->
-                <track id="subTrack" label="English" kind="subtitles" srclang="en" src="subtitles.vtt" default>
+				<!-- Subtitle tracks will be dynamically added here -->
                 Your browser does not support the video tag.
             </video>
             <div class="absolute top-4 left-4 bg-blue-600 text-white py-1 px-2 rounded">Now Playing</div>
@@ -77,12 +76,12 @@
     </div>
 
     <script>
-        // Define episodes with their details and a flag to disable the third episode
+        // Define episodes with their details
         const episodes = [
             { value: 'https://media.githubusercontent.com/media/EGLC-MtTOOLS/sigmatv/main/Episode1.mkv', label: 'Mash Burnedead and the Divine Visionaries', thumbnail: 'episodeImage.jpg' },
-            { value: 'https://media.githubusercontent.com/media/EGLC-MtTOOLS/sigmatv/main/Episode2.mkv', label: 'Mash Burnedead and the Home Visit', thumbnail: 'episodeImage2.jpg' },
-            { value: 'https://media.githubusercontent.com/media/EGLC-MtTOOLS/sigmatv/main/Episode3.mkv', label: 'Rayne Ames and God´s Gift - [SOON!]', thumbnail: 'episodeImage3.jpg', disabled: true },
-            { value: 'https://media.githubusercontent.com/media/EGLC-MtTOOLS/sigmatv/main/Episode4.mkv', label: 'Mash Burnedead and the Brawny Balloon - [SOON!]', thumbnail: 'episodeImage4.jpg', disabled: true }, // Disable third episode
+            { value: 'https://media.githubusercontent.com/media/EGLC-MtTOOLS/sigmatv/main/Episode2.mkv', label: 'Mash Burnedead and the Home Visit', thumbnail: 'episodeImage2.jpg', subtitles: [{ label: 'English', srclang: 'en', src: 'subtitles/Episode2subtitles.vtt' }]},
+            { value: 'https://media.githubusercontent.com/media/EGLC-MtTOOLS/sigmatv/main/Episode3.mkv', label: 'Rayne Ames and God´s Gift - [SOON!]', thumbnail: 'episodeImage3.jpg', disabled: true, subtitles: [{ label: 'English', srclang: 'en', src: 'subtitles/Episode3subtitles.vtt' }]},
+            { value: 'https://media.githubusercontent.com/media/EGLC-MtTOOLS/sigmatv/main/Episode4.mkv', label: 'Mash Burnedead and the Brawny Balloon - [SOON!]', thumbnail: 'episodeImage4.jpg', disabled: true, subtitles: [{ label: 'English', srclang: 'en', src: 'subtitles/Episode4subtitles.vtt' }]},
         ];
 
         const videoPlayer = document.getElementById('videoPlayer');
@@ -91,12 +90,28 @@
         const ratingStars = document.getElementById('ratingStars');
         const currentRatingText = document.getElementById('currentRating');
     	const toggleSubtitlesButton = document.getElementById('toggleSubtitles');
-        const subTrack = document.getElementById('subTrack');
 
-	    // Toggle Subtitles
-        let subtitlesEnabled = true;
-        toggleSubtitlesButton.addEventListener('click', () => { subtitlesEnabled = !subtitlesEnabled; subTrack.mode = subtitlesEnabled ? 'showing' : 'hidden'; toggleSubtitlesButton.textContent = subtitlesEnabled ? 'Subtitles: On' : 'Subtitles: Off'; });
+	    // Function to update subtitles for the selected episode
+        const updateSubtitles = (subtitles) => {
+            // Remove existing subtitle tracks
+            const existingTracks = videoPlayer.querySelectorAll('track');
+            existingTracks.forEach(track => track.remove());
 
+            // Add new subtitle tracks
+            subtitles.forEach(sub => {
+                const track = document.createElement('track');
+                track.label = sub.label;
+                track.kind = 'subtitles';
+                track.srclang = sub.srclang;
+                track.src = sub.src;
+                if (sub.label === 'English') track.default = true; // Set English as default
+                videoPlayer.appendChild(track);
+            });
+
+            // Reload the video to apply new subtitles
+            videoPlayer.load();
+        };
+		
         // Populate episode list dynamically
         episodes.forEach((episode, index) => {
             const episodeItem = document.createElement('div');
@@ -108,7 +123,7 @@
             }
 
             const thumbnail = document.createElement('img');
-            thumbnail.src = episode.thumbnail; // Replace with actual thumbnail paths
+            thumbnail.src = episodeImage; // Replace with actual thumbnail paths
             thumbnail.alt = episode.label;
             thumbnail.classList.add('w-16', 'h-16', 'rounded-lg');
 
@@ -124,12 +139,24 @@
             if (!episode.disabled) {
                 episodeItem.addEventListener('click', () => {
                     videoSource.src = episode.value;
-                    videoPlayer.load();
+                    updateSubtitles(episode.subtitles); // Update subtitles for the selected episode
+					videoPlayer.load();
                     videoPlayer.play();
                     resetRating(); // Reset the rating when switching episodes
                 });
             }
         });
+		
+		// Toggle Subtitles
+        let subtitlesEnabled = true;
+        toggleSubtitlesButton.addEventListener('click', () => {
+            subtitlesEnabled = !subtitlesEnabled;
+            const tracks = videoPlayer.querySelectorAll('track');
+            tracks.forEach(track => {
+                track.mode = subtitlesEnabled ? 'showing' : 'hidden';
+            });
+            toggleSubtitlesButton.textContent = subtitlesEnabled ? 'Subtitles: On' : 'Subtitles: Off';
+		});
 
         // Rating system functionality
         let currentRating = 0;
