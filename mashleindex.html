@@ -17,7 +17,7 @@
                 <source src="sample-video.ogg" type="video/ogg">
                 <source src="sample-video.mkv" type="video/mkv">
 				   <!-- Add subtitle tracks -->
-                <track id="subTrack" label="English" kind="subtitles" srclang="en" src="subtitles-en.vtt" default>
+                <track id="subTrack" label="English" kind="subtitles" srclang="en" src="subtitles.vtt" default>
                 Your browser does not support the video tag.
             </video>
             <div class="absolute top-4 left-4 bg-blue-600 text-white py-1 px-2 rounded">Now Playing</div>
@@ -90,6 +90,12 @@
         const episodeList = document.getElementById('episodeList');
         const ratingStars = document.getElementById('ratingStars');
         const currentRatingText = document.getElementById('currentRating');
+    	const toggleSubtitlesButton = document.getElementById('toggleSubtitles');
+        const subTrack = document.getElementById('subTrack');
+
+	    // Toggle Subtitles
+        let subtitlesEnabled = true;
+        toggleSubtitlesButton.addEventListener('click', () => { subtitlesEnabled = !subtitlesEnabled; subTrack.mode = subtitlesEnabled ? 'showing' : 'hidden'; toggleSubtitlesButton.textContent = subtitlesEnabled ? 'Subtitles: On' : 'Subtitles: Off'; });
 
         // Populate episode list dynamically
         episodes.forEach((episode, index) => {
