@@ -2,22 +2,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Art Gallery</title>
+  <title>Unsettling AI Art Gallery</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Include Tailwind CSS CDN link if you are using Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-  <header>
-    <h1>The Art Gallery</h1>
-    <p>A collection of artwork.</p>
+  <header class="text-center py-4">
+    <h1 class="text-3xl font-bold">The Art Gallery</h1>
+    <p class="text-lg mt-2">A collection of artwork.</p>
   </header>
   
-  <!-- Updated button -->
-  <button onclick="window.location.href='../index.html';"
-          class="bg-red-600 text-white py-2 px-10 rounded hover:bg-red-700 absolute left-1/2 top-4 transform -translate-x-1/2 w-1/2">
-    BACK
-  </button>
+  <div class="flex justify-center my-6">
+    <button onclick="window.location.href='../index.html';"
+            class="bg-red-600 text-white py-2 px-10 rounded hover:bg-red-700 w-1/2 text-center">
+      BACK
+    </button>
+  </div>
 
   <main id="gallery">
   </main>
