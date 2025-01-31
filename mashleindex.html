@@ -91,7 +91,12 @@
         const currentRatingText = document.getElementById('currentRating');
     	const toggleSubtitlesButton = document.getElementById('toggleSubtitles');
 
-	    // Function to update subtitles for the selected episode
+        // Populate episode list dynamically
+        episodes.forEach((episode, index) => {
+            const episodeItem = document.createElement('div');
+            episodeItem.classList.add('flex', 'items-center', 'space-x-4', 'p-2', 'border', 'rounded-lg', 'cursor-pointer', 'hover:bg-gray-100');
+
+    // Function to update subtitles for the selected episode
         const updateSubtitles = (subtitles) => {
             // Remove existing subtitle tracks
             const existingTracks = videoPlayer.querySelectorAll('track');
@@ -112,11 +117,7 @@
             videoPlayer.load();
         };
 		
-        // Populate episode list dynamically
-        episodes.forEach((episode, index) => {
-            const episodeItem = document.createElement('div');
-            episodeItem.classList.add('flex', 'items-center', 'space-x-4', 'p-2', 'border', 'rounded-lg', 'cursor-pointer', 'hover:bg-gray-100');
-
+		
             // Apply red hue and disable the third button
             if (episode.disabled) {
                 episodeItem.classList.add('bg-red-500', 'cursor-not-allowed');
