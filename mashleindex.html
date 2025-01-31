@@ -16,10 +16,16 @@
                 <source src="sample-video.webm" type="video/webm">
                 <source src="sample-video.ogg" type="video/ogg">
                 <source src="sample-video.mkv" type="video/mkv">
+				   <!-- Add subtitle tracks -->
+                <track id="subTrack" label="English" kind="subtitles" srclang="en" src="subtitles-en.vtt" default>
                 Your browser does not support the video tag.
             </video>
             <div class="absolute top-4 left-4 bg-blue-600 text-white py-1 px-2 rounded">Now Playing</div>
+			 <!-- Subtitle Toggle Button -->
+            <button id="toggleSubtitles" class="absolute top-4 right-4 bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-700">Subtitles: On</button>
         </div>
+	</div>
+	
 
         <!-- Episode Selector -->
         <div class="mb-6">
@@ -68,7 +74,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <script>
         // Define episodes with their details and a flag to disable the third episode
