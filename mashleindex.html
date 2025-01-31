@@ -103,7 +103,8 @@
             existingTracks.forEach(track => track.remove());
 
             // Add new subtitle tracks
-            subtitles.forEach(sub => {
+            if (Array.isArray(subtitles)) {
+		subtitles.forEach(sub => {
                 const track = document.createElement('track');
                 track.label = sub.label;
                 track.kind = 'subtitles';
@@ -112,6 +113,7 @@
                 if (sub.label === 'English') track.default = true; // Set English as default
                 videoPlayer.appendChild(track);
             });
+	    }
 
             // Reload the video to apply new subtitles
             videoPlayer.load();
@@ -124,7 +126,7 @@
             }
 
             const thumbnail = document.createElement('img');
-            thumbnail.src = episodeImage; // Replace with actual thumbnail paths
+            thumbnail.src = episode.thumbnail; // Replace with actual thumbnail paths
             thumbnail.alt = episode.label;
             thumbnail.classList.add('w-16', 'h-16', 'rounded-lg');
 
@@ -140,8 +142,13 @@
             if (!episode.disabled) {
                 episodeItem.addEventListener('click', () => {
                     videoSource.src = episode.value;
-                    updateSubtitles(episode.subtitles); // Update subtitles for the selected episode
-					videoPlayer.load();
+                    if (episode.subtitles) {
+			     updateSubtitles(episode.subtitles);
+		    }
+			else {
+			    updateSubtitles([]); // Pass an empty array if no subtitles
+			} // Update subtitles for the selected episode
+			videoPlayer.load();
                     videoPlayer.play();
                     resetRating(); // Reset the rating when switching episodes
                 });
