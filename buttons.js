@@ -14,7 +14,7 @@ const secretInput = document.getElementById('secretInput');
 const submitButton = document.querySelector('.submit-button');
 
 function checkSecret() {
-  if (secretInput.value === 'ilikebananas123') {
+  if (secretInput.value === 'ilikebananas12') {
     window.location.href = 'TGA/hello.html';
   }
 }
