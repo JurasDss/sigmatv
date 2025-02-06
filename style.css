@@ -19,10 +19,14 @@ body {
 }
 
 .container {
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+  gap: 2rem; /* Space between buttons */
   position: relative;
   z-index: 2;
+  width: 90%; /* Adjust as needed */
+  max-width: 1200px; /* Maximum width for the container */
+  padding: 20px; /* Padding around the grid */
 }
 
 .button {
@@ -37,6 +41,10 @@ body {
   transition: all 0.3s ease;
   overflow: hidden;
   backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .button-text {
