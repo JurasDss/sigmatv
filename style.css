@@ -93,6 +93,27 @@ body {
   transition: opacity 0.3s ease;
 }
 
+/* Mobile image is visible by default */
+.mobile-image {
+  display: block;
+}
+
+/* PC image is hidden by default */
+.pc-image {
+  display: none;
+}
+
+/* Switch images for PC */
+@media (min-width: 768px) {
+  .mobile-image {
+    display: none;
+  }
+
+  .pc-image {
+    display: block;
+  }
+}
+
 .button:hover .button-cover {
   opacity: 1; /* Increase opacity on hover */
 }
