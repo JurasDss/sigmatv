@@ -64,7 +64,6 @@ body {
 
 .button {
   position: relative;
-  padding: 1.5rem 3rem;
   font-size: 1.5rem;
   text-decoration: none;
   color: #fff;
@@ -74,10 +73,11 @@ body {
   transition: all 0.3s ease;
   overflow: hidden;
   backdrop-filter: blur(5px);
-  display: flex;
+  display: inline-flex; /* Change to inline-flex */
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 0; /* Remove fixed padding */
 }
 
 /* New styles for cover images */
