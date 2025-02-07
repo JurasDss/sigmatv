@@ -3,27 +3,30 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align container to the top */
+  align-items: center; /* Center vertically and horizontally */
   background: #000;
   overflow: hidden;
   font-family: 'Segoe UI', system-ui, sans-serif;
-  padding-top: 20px; /* Add some padding at the top */
 }
 
-#bg-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* Parent wrapper for the container */
+.container-wrapper {
+  position: relative;
   width: 100%;
-  height: 100%;
-  z-index: 1;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
   gap: 2rem; /* Space between buttons */
-  position: relative;
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset to truly center */
   z-index: 2;
   width: 90%; /* Adjust as needed */
   max-width: 1200px; /* Maximum width for the container */
@@ -51,6 +54,15 @@ body {
 
 .container::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 0, 255, 0.8); /* Thumb color on hover */
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 .button {
