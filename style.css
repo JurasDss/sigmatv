@@ -78,6 +78,8 @@ body {
   align-items: center;
   text-align: center;
   padding: 0; /* Remove fixed padding */
+  width: 230px;
+  height: 325px;
 }
 
 /* New styles for cover images */
