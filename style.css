@@ -64,7 +64,6 @@ body {
 
 .button {
   position: relative;
-  aspect-ratio: 46 / 65;
   padding: 1.5rem 3rem;
   font-size: 1.5rem;
   text-decoration: none;
