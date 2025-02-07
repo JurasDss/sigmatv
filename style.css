@@ -133,6 +133,7 @@ body {
     0 0 40px rgba(255,0,255,0.3),
     0 0 60px rgba(255,0,255,0.1);
   background: rgba(128, 0, 128, 0.5);
+  z-index: 3;
 }
 
 .button:hover .button-glow {
