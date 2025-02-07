@@ -3,10 +3,11 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Align container to the top */
   background: #000;
   overflow: hidden;
   font-family: 'Segoe UI', system-ui, sans-serif;
+  padding-top: 20px; /* Add some padding at the top */
 }
 
 #bg-canvas {
