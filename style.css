@@ -93,24 +93,23 @@ body {
   transition: opacity 0.3s ease;
 }
 
-/* Mobile image is visible by default */
-.mobile-image {
-  display: block;
+/* Ensure only one image is visible at a time */
+.button-cover.mobile-image {
+  display: none; /* Hide mobile image by default */
 }
 
-/* PC image is hidden by default */
-.pc-image {
-  display: none;
+.button-cover.pc-image {
+  display: block; /* Show PC image by default */
 }
 
-/* Switch images for PC */
-@media (min-width: 768px) {
-  .mobile-image {
-    display: none;
+/* Switch images for mobile */
+@media (max-width: 767px) {
+  .button-cover.mobile-image {
+    display: block; /* Show mobile image */
   }
 
-  .pc-image {
-    display: block;
+  .button-cover.pc-image {
+    display: none; /* Hide PC image */
   }
 }
 
