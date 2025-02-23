@@ -179,7 +179,7 @@ postCommentButton.addEventListener('click', () => {
         userName.textContent = 'Anonymous';
 
         const commentContent = document.createElement('p');
-        commentContent.textContent = sanitizedComment; // Use sanitized content
+        commentContent.textContent = commentText;
 
         commentDiv.appendChild(userName);
         commentDiv.appendChild(commentContent);
