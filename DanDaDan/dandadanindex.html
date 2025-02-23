@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-Frame-Options" content="deny">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' https://cdn.tailwindcss.com; img-src 'self' https://media.githubusercontent.com; frame-src 'none';">
     <title>DAN DA DAN</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -168,7 +170,9 @@ postCommentButton.addEventListener('click', () => {
     const commentText = commentInput.value.trim();
 
     if (commentText) {
-        const commentDiv = document.createElement('div');
+        const sanitizedComment = DOMPurify.sanitize(commentText); // Sanitize input
+	    
+	const commentDiv = document.createElement('div');
         commentDiv.classList.add('p-4', 'bg-gray-100', 'rounded-lg');
 
         const userName = document.createElement('p');
@@ -176,7 +180,7 @@ postCommentButton.addEventListener('click', () => {
         userName.textContent = 'Anonymous';
 
         const commentContent = document.createElement('p');
-        commentContent.textContent = commentText;
+        commentContent.textContent = sanitizedComment; // Use sanitized content
 
         commentDiv.appendChild(userName);
         commentDiv.appendChild(commentContent);
