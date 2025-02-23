@@ -169,8 +169,6 @@ postCommentButton.addEventListener('click', () => {
     const commentText = commentInput.value.trim();
 
     if (commentText) {
-        const sanitizedComment = DOMPurify.sanitize(commentText); // Sanitize input
-	    
 	const commentDiv = document.createElement('div');
         commentDiv.classList.add('p-4', 'bg-gray-100', 'rounded-lg');
 
