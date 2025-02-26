@@ -18,6 +18,7 @@ body {
   height: 100vh; /* Full viewport height */
   position: relative;
   z-index: 3;
+  overflow: hidden; /* Prevent scrolling on the wrapper */
 }
 
 .container {
@@ -32,6 +33,7 @@ body {
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: rgba(255, 0, 255, 0.5) rgba(0, 0, 0, 0.1); /* For Firefox */
   z-index: 3; /* Ensure the container is above the canvas */
+  margin: auto; /* Center the container */
 }
 
 /* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
