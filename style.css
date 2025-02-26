@@ -18,6 +18,7 @@ body {
   height: 100vh; /* Full viewport height */
   position: relative;
   z-index: 3;
+  overflow: hidden; /* Prevent scrolling on the wrapper */
 }
 
 .container {
@@ -32,6 +33,7 @@ body {
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: rgba(255, 0, 255, 0.5) rgba(0, 0, 0, 0.1); /* For Firefox */
   z-index: 3; /* Ensure the container is above the canvas */
+  margin: auto; /* Center the container */
 }
 
 /* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
@@ -177,14 +179,19 @@ body {
   animation: circuit-flow 1s linear infinite;
 }
 
+/* Secret Input Container */
 .secret-input-container {
   position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 2rem; /* Positioned at the bottom */
+  left: 50%; /* Centered horizontally */
+  transform: translateX(-50%); /* Centered horizontally */
   display: flex;
-  gap: 1rem;
-  z-index: 3; /* Ensure the input container is above the canvas and buttons */
+  gap: 1rem; /* Space between input and button */
+  z-index: 5; /* Ensure it's above the container and canvas */
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  padding: 1rem; /* Add padding for better spacing */
+  border-radius: 8px; /* Match the button style */
+  backdrop-filter: blur(5px); /* Blur effect */
 }
 
 #secretInput {
