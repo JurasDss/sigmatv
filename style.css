@@ -2,7 +2,7 @@ body {
   margin: 0;
   min-height: 100vh;
   display: flex;
-  justify-content: center; /* Center horizontally */
+  justify-content: center;
   background: #000;
   overflow: hidden;
   font-family: 'Segoe UI', system-ui, sans-serif;
@@ -10,47 +10,47 @@ body {
 
 .container-wrapper {
   display: flex;
-  justify-content: center; /* Center horizontally */
+  justify-content: center;
   width: 100%;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   position: relative;
   z-index: 3;
-  overflow: hidden; /* Prevent scrolling on the wrapper */
+  overflow: hidden;
 }
 
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
-  gap: 2rem; /* Space between buttons */
-  width: 90%; /* Adjust as needed */
-  max-width: 1200px; /* Maximum width for the container */
-  padding: 20px; /* Padding around the grid */
-  max-height: 80vh; /* Set a maximum height for the container */
-  overflow-y: auto; /* Enable vertical scrolling */
+  gap: 2rem;
+  width: 90%;
+  max-width: 1200px;
+  padding: 20px;
+  max-height: 80vh;
+  overflow-y: auto;
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: rgba(255, 0, 255, 0.5) rgba(0, 0, 0, 0.1); /* For Firefox */
-  z-index: 3; /* Ensure the container is above the canvas */
-  margin: auto; /* Center the container */
-  align-self: flex-start; /* Align container to the top */
+  z-index: 3;
+  margin: auto;
+  align-self: flex-start;
 }
 
 /* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
 .container::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  width: 8px;
 }
 
 .container::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1); /* Track color */
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
 
 .container::-webkit-scrollbar-thumb {
-  background: rgba(255, 0, 255, 0.5); /* Thumb color */
+  background: rgba(255, 0, 255, 0.5);
   border-radius: 4px;
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 0, 255, 0.8); /* Thumb color on hover */
+  background: rgba(255, 0, 255, 0.8);
 }
 
 #bg-canvas {
@@ -59,7 +59,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Canvas is below the container */
+  z-index: 1;
 }
 
 .button {
@@ -80,16 +80,15 @@ body {
   text-align: center;
 }
 
-/* New styles for cover images */
 .button-cover {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensure the image covers the button */
-  z-index: 2; /* Place the image behind the text and other elements */
-  opacity: 0.7; /* Adjust opacity to blend with the button design */
+  object-fit: cover;
+  z-index: 2;
+  opacity: 0.7;
   transition: opacity 0.3s ease;
 }
 
@@ -114,7 +113,7 @@ body {
 }
 
 .button:hover .button-cover {
-  opacity: 1; /* Increase opacity on hover */
+  opacity: 1;
 }
 
 .button-text {
@@ -177,19 +176,18 @@ body {
   animation: circuit-flow 1s linear infinite;
 }
 
-/* Secret Input Container */
 .secret-input-container {
   position: fixed;
-  bottom: 2rem; /* Positioned at the bottom */
-  left: 50%; /* Centered horizontally */
-  transform: translateX(-50%); /* Centered horizontally */
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  gap: 1rem; /* Space between input and button */
-  z-index: 5; /* Ensure it's above the container and canvas */
-  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-  padding: 1rem; /* Add padding for better spacing */
-  border-radius: 8px; /* Match the button style */
-  backdrop-filter: blur(5px); /* Blur effect */
+  gap: 1rem;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
 }
 
 #secretInput {
