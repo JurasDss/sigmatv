@@ -25,7 +25,7 @@ body {
   width: 90%;
   max-width: 1200px;
   padding: 20px;
-  max-height: 80vh;
+  max-height: 70vh;
   overflow-y: auto;
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: rgba(255, 0, 255, 0.5) rgba(0, 0, 0, 0.1); /* For Firefox */
