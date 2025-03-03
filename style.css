@@ -21,7 +21,7 @@ body {
 @media (max-width: 767px) {
   .container-wrapper {
     align-items: flex-start; /* Align to the top on mobile */
-    padding-top: 20px;
+    padding-top: 10px;
   }
 }
 
