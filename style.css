@@ -18,6 +18,13 @@ body {
   overflow: visible;
 }
 
+@media (max-width: 767px) {
+  .container-wrapper {
+    align-items: flex-start; /* Align to the top on mobile */
+    padding-top: 20px;
+  }
+}
+
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
