@@ -14,7 +14,6 @@
         <div class="relative mb-6">
             <video id="videoPlayer" class="w-full rounded-lg" controls>
                 <source id="videoSource" src="https://media.githubusercontent.com/media/JurasDss/sigmatv/main/MashleS2/Episode1-1080p.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
             <div class="absolute top-4 left-4 bg-blue-600 text-white py-1 px-2 rounded">Now Playing</div>
         </div>
@@ -35,6 +34,14 @@
             <div id="episodeList" class="space-y-4">
                 <!-- Episodes will be dynamically added here -->
             </div>
+        </div>
+
+	<!-- Music Player -->
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Music Player</h2>
+            <audio id="musicPlayer" class="w-full" controls>
+                <source src="audio.ogg" type="audio/ogg">
+            </audio>
         </div>
 
         <!-- Rating System -->
