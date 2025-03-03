@@ -20,14 +20,15 @@ body {
 
 @media (max-width: 767px) {
   .container-wrapper {
-    align-items: flex-start; /* Align to the top on mobile */
+    align-items: flex-start;
     padding-top: 10px;
-    overflow: hidden; /* Prevent unwanted scrolling issues */
+    overflow: hidden;
+    padding-bottom: 100px;
   }
 
   .container {
-    max-height: 80vh; /* Allow scrolling space */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 80vh;
+    overflow-y: auto;
   }
 }
 
