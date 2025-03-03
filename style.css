@@ -207,7 +207,7 @@ body {
 
 @media (max-width: 767px) {
   .secret-input-container {
-    bottom: 1rem;
+    bottom: 0.5rem;
   }
 }
 
