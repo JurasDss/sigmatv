@@ -15,7 +15,7 @@ const submitButton = document.querySelector('.submit-button');
 
 function checkSecret() {
   if (secretInput.value === 'china') {
-    window.location.href = '../chinaindex.html';
+    window.location.href = 'china/chinaindex.html';
   }
 }
 
