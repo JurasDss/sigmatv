@@ -32,7 +32,8 @@ body {
   z-index: 3;
   margin: auto;
   align-self: flex-start;
-  margin-bottom: 120px;
+   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 /* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
