@@ -4,7 +4,7 @@ body {
   display: flex;
   justify-content: center;
   background: #000;
-  overflow: visible;
+  overflow-x: hidden;
   font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
@@ -22,6 +22,12 @@ body {
   .container-wrapper {
     align-items: flex-start; /* Align to the top on mobile */
     padding-top: 10px;
+    overflow: hidden; /* Prevent unwanted scrolling issues */
+  }
+
+  .container {
+    max-height: 80vh; /* Allow scrolling space */
+    overflow-y: auto; /* Enable vertical scrolling */
   }
 }
 
@@ -32,7 +38,6 @@ body {
   width: 90%;
   max-width: 1200px;
   padding: 20px;
-  max-height: calc(100vh - 200px);
   overflow-y: scroll;
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: rgba(255, 0, 255, 0.5) rgba(0, 0, 0, 0.1); /* For Firefox */
