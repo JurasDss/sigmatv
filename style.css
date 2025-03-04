@@ -207,7 +207,7 @@ body {
 
 @media (max-width: 767px) {
   .secret-input-container {
-    bottom: 5vh;
+    bottom: 3vh;
     transform: translateX(-50%);
   }
 }
