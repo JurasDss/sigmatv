@@ -22,13 +22,13 @@ body {
   .container-wrapper {
     align-items: flex-start;
     padding-top: 10px;
-    overflow: hidden;
+    overflow: visible !important;
     padding-bottom: 100px;
   }
 
   .container {
     max-height: 80vh;
-    overflow-y: auto;
+    overflow-y: scroll !important;
   }
 }
 
