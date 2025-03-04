@@ -28,6 +28,8 @@ body {
 
   .container {
     max-height: 80vh;
+    height: auto;
+    min-height: 0;
     overflow-y: scroll !important;
   }
 }
