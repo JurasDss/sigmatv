@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QCQ7BZCCZK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QCQ7BZCCZK');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Frame-Options" content="deny">
+    <title>DAN DA DAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-700 via-blue-500 to-purple-700 text-white min-h-screen flex items-center justify-center">
+    <button onclick="window.location.href='https://jurasdss.github.io/sigmatv/index.html';" class="absolute top-4 left-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">BACK</button>
+    <div class="container max-w-4xl p-6 bg-white rounded-2xl shadow-lg text-gray-800">
+        <!-- Video Player -->
+        <div class="relative mb-6">
+            <video id="videoPlayer" class="w-full rounded-lg" controls>
+                <source id="videoSource" src="https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode1-1080p.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="absolute top-4 left-4 bg-blue-600 text-white py-1 px-2 rounded">Now Playing</div>
+        </div>
+
+        <!-- Resolution Selector -->
+        <div class="mb-4">
+            <label for="resolutionSelector" class="block text-sm font-medium text-gray-700">Resolution</label>
+            <select id="resolutionSelector" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <option value="480">480p</option>
+                <option value="720">720p</option>
+                <option value="1080">1080p</option>
+            </select>
+        </div>
+
+        <!-- Episode Selector -->
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Episodes</h2>
+            <div id="episodeList" class="space-y-4">
+                <!-- Episodes will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Rating System -->
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Rate this Episode</h2>
+            <div id="ratingStars" class="flex space-x-2">
+                <button data-rating="1" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="2" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="3" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="4" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="5" class="text-gray-400 hover:text-yellow-600">★</button>
+            </div>
+            <p id="currentRating" class="mt-2 text-sm text-gray-600">No rating yet.</p>
+        </div>
+
+        <!-- Comment Section -->
+        <div>
+            <h2 class="text-xl font-semibold mb-2">Comments</h2>
+            <textarea id="commentInput" class="w-full p-2 border rounded-lg bg-gray-100 text-gray-800 mb-4" rows="4" placeholder="Write your comment..."></textarea>
+            <button id="postCommentButton" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Post Comment</button>
+
+            <!-- Display Comments -->
+            <div id="commentsSection" class="mt-6 space-y-4">
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <p class="font-semibold">User123</p>
+                    <p>Great episode! Really enjoyed it.</p>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <p class="font-semibold">MovieFan</p>
+                    <p>Can't wait for the next episode!</p>
+                </div>
+                <div class="p-4 bg-red-100 rounded-lg">
+                    <p class="font-semibold">Zhon Xina</p>
+                    <p>😈😈😈</p>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <p class="font-semibold">Alexi</p>
+                    <p>Ja!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define episodes with their details
+const episodes = [
+    {
+                label: 'That´s How Love Starts, Ya Know!',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode1-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode1-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode1-1080p.mp4'
+                },
+                thumbnail: 'episodeImage.jpg'
+	},
+	{
+                label: 'That´s a Space Alien, Ain´t It?!',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode2-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode2-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode2-1080p.mp4'
+                },
+                thumbnail: 'episodeImage2.jpg'
+	},
+    {
+                label: 'It´s Granny vs. Granny Clash!',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode3-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode3-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode3-1080p.mp4'
+                },
+                thumbnail: 'episodeImage3.jpg'
+	},
+    {
+                label: 'Kicking Turbo Granny´s Ass',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode4-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode4-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode4-1080p.mp4'
+                },
+                thumbnail: 'episodeImage4.jpg'
+	},
+    {
+                label: 'Like, Where Are Your Balls?',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode5-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode5-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode5-1080p.mp4'
+                },
+                thumbnail: 'episodeImage5.jpg'
+	},
+    {
+                label: 'A Dangerous Woman Arrives',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode6-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode6-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode6-1080p.mp4'
+                },
+                thumbnail: 'episodeImage6.jpg'
+	},
+	{
+                label: 'To a Kinder World',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode7-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode7-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode7-1080p.mp4'
+                },
+                thumbnail: 'episodeImage7.jpg'
+	},
+	{
+                label: 'I´ve Got This Funny Feeling',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode8-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode8-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode8-1080p.mp4'
+                },
+                thumbnail: 'episodeImage8.jpg'
+	},
+	{
+                label: 'Merge! Serpo Dover Demon Nessie!',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode9-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode9-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode9-1080p.mp4'
+                },
+                thumbnail: 'episodeImage9.jpg'
+	},
+	{
+                label: 'Have You Ever Seen a Cattle Mutation?',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode10-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode10-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode10-1080p.mp4'
+                },
+                thumbnail: 'episodeImage10.jpg'
+	},
+	{
+                label: 'First Love',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode11-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode11-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode11-1080p.mp4'
+                },
+                thumbnail: 'episodeImage11.jpg'
+	},
+	{
+                label: 'Let´s Go to the Cursed House',
+                sources: 
+				{
+                    '480': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode12-480p.mp4',
+                    '720': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode12-720p.mp4',
+                    '1080': 'https://media.githubusercontent.com/media/JurasDss/sigmatv/main/DanDaDan/Episode12-1080p.mp4'
+                },
+                thumbnail: 'episodeImage12.jpg'
+	}
+];
+
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoSource = document.getElementById('videoSource');
+        const episodeList = document.getElementById('episodeList');
+        const resolutionSelector = document.getElementById('resolutionSelector');
+        const ratingStars = document.getElementById('ratingStars');
+        const currentRatingText = document.getElementById('currentRating');
+
+        let currentEpisode = null;
+
+        // Populate episode list dynamically
+        episodes.forEach((episode) => {
+            const episodeItem = document.createElement('div');
+            episodeItem.classList.add('flex', 'items-center', 'space-x-4', 'p-2', 'border', 'rounded-lg', 'cursor-pointer', 'hover:bg-gray-100');
+
+            // Apply red hue and disable the button
+			if (episode.disabled) {
+			episodeItem.classList.add('bg-red-500', 'cursor-not-allowed');
+			}
+			
+			const thumbnail = document.createElement('img');
+            thumbnail.src = episode.thumbnail;
+            thumbnail.alt = episode.label;
+            thumbnail.classList.add('w-28,4', 'h-16', 'rounded-lg');
+
+            const episodeDetails = document.createElement('div');
+            episodeDetails.textContent = episode.label;
+
+            episodeItem.appendChild(thumbnail);
+            episodeItem.appendChild(episodeDetails);
+
+            episodeList.appendChild(episodeItem);
+
+            // Add click event to play the selected video if not disabled
+			if (!episode.disabled) {
+            episodeItem.addEventListener('click', () => {
+                currentEpisode = episode;
+                updateVideoSource(resolutionSelector.value); // Set video source based on selected resolution
+                videoPlayer.load();
+                videoPlayer.play();
+                resetRating(); // Reset the rating when switching episodes
+            });
+			}
+        });
+
+        // Update video source based on selected resolution
+        const updateVideoSource = (resolution) => {
+            if (currentEpisode) {
+                videoSource.src = currentEpisode.sources[resolution];
+                videoPlayer.load();
+            }
+        };
+
+        // Add event listener to resolution selector
+        resolutionSelector.addEventListener('change', (event) => {
+            updateVideoSource(event.target.value);
+        });
+
+        // Rating system functionality
+        let currentRating = 0;
+
+        const resetRating = () => {
+            currentRating = 0;
+            Array.from(ratingStars.children).forEach(star => {
+                star.classList.remove('text-yellow-500');
+                star.classList.add('text-gray-400');
+            });
+            currentRatingText.textContent = 'No rating yet.';
+        };
+
+        ratingStars.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                currentRating = parseInt(event.target.dataset.rating, 10);
+
+                // Update the stars' appearance
+                Array.from(ratingStars.children).forEach(star => {
+                    if (parseInt(star.dataset.rating, 10) <= currentRating) {
+                        star.classList.remove('text-gray-400');
+                        star.classList.add('text-yellow-500');
+                    } else {
+                        star.classList.remove('text-yellow-500');
+                        star.classList.add('text-gray-400');
+                    }
+                });
+
+                // Update the current rating text
+                currentRatingText.textContent = `You rated this episode ${currentRating} star${currentRating > 1 ? 's' : ''}.`;
+            }
+        });
+
+        // Comment Section Functionality
+        const commentInput = document.getElementById('commentInput');
+        const postCommentButton = document.getElementById('postCommentButton');
+        const commentsSection = document.getElementById('commentsSection');
+
+        postCommentButton.addEventListener('click', () => {
+            const commentText = commentInput.value.trim();
+
+            if (commentText) {
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('p-4', 'bg-gray-100', 'rounded-lg');
+
+                const userName = document.createElement('p');
+                userName.classList.add('font-semibold');
+                userName.textContent = 'Anonymous';
+
+                const commentContent = document.createElement('p');
+                commentContent.textContent = commentText;
+
+                commentDiv.appendChild(userName);
+                commentDiv.appendChild(commentContent);
+                commentsSection.appendChild(commentDiv);
+
+                commentInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
