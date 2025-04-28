@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QCQ7BZCCZK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QCQ7BZCCZK');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Art Gallery</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="text-center py-4">
+    <h1 class="text-3xl font-bold">The Art Gallery</h1>
+    <p class="text-lg mt-2">A collection of artwork.</p>
+  </header>
+  
+  <div class="flex justify-center my-6 space-x-4">
+    <button onclick="window.location.href='../index.html';"
+            class="bg-red-600 text-white py-2 px-6 rounded hover:bg-red-700 w-40 text-center">
+      BACK
+    </button>
+    <button onclick="location.reload();"
+            class="bg-blue-600 text-white py-2 px-6 rounded hover:bg-blue-700 w-40 text-center">
+      New Pictures
+    </button>
+  </div>
+
+  <main id="gallery">
+  </main>
+
+  <script src="gallery.js"></script>
+</body>
+</html>
