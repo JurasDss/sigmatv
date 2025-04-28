@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Video Player with Rating</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-700 via-blue-500 to-purple-700 text-white min-h-screen flex items-center justify-center">
+    <div class="container max-w-4xl p-6 bg-white rounded-2xl shadow-lg text-gray-800">
+        <!-- Video Player -->
+        <div class="relative mb-6">
+            <video id="videoPlayer" class="w-full rounded-lg" controls>
+                <source id="videoSource" src="sample-video.mp4" type="video/mp4">
+                <source src="sample-video.webm" type="video/webm">
+                <source src="sample-video.ogg" type="video/ogg">
+                <source src="sample-video.mkv" type="video/mkv">
+                Your browser does not support the video tag.
+            </video>
+            <div class="absolute top-4 left-4 bg-blue-600 text-white py-1 px-2 rounded">Now Playing</div>
+        </div>
+
+        <!-- Episode Selector -->
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Episodes</h2>
+            <div id="episodeList" class="space-y-4">
+                <!-- Episodes will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Rating System -->
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Rate this Episode</h2>
+            <div id="ratingStars" class="flex space-x-2">
+                <button data-rating="1" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="2" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="3" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="4" class="text-gray-400 hover:text-yellow-600">★</button>
+                <button data-rating="5" class="text-gray-400 hover:text-yellow-600">★</button>
+            </div>
+            <p id="currentRating" class="mt-2 text-sm text-gray-600">No rating yet.</p>
+        </div>
+
+        <!-- Comment Section -->
+        <div>
+            <h2 class="text-xl font-semibold mb-2">Comments</h2>
+            <textarea id="commentInput" class="w-full p-2 border rounded-lg bg-gray-100 text-gray-800 mb-4" rows="4" placeholder="Write your comment..."></textarea>
+            <button id="postCommentButton" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Post Comment</button>
+
+            <!-- Display Comments -->
+            <div id="commentsSection" class="mt-6 space-y-4">
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <p class="font-semibold">User123</p>
+                    <p>Great episode! Really enjoyed it.</p>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <p class="font-semibold">MovieFan</p>
+                    <p>Canâ€™t wait for the next episode!</p>
+                </div>
+                <div class="p-4 bg-yellow-100 rounded-lg">
+                    <p class="font-semibold">ðŸ‘‘ ShrimpMan129</p>
+                    <p>Join my Discord server for free ðŸ¦!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define episodes with their details
+        const episodes = [
+            { value: 'sample-video.mp4', label: 'Episode 1: The Beginning', thumbnail: 'thumbnail1.jpg' },
+            { value: 'sample-video2.mp4', label: 'Episode 2: The Adventure Continues', thumbnail: 'thumbnail2.jpg' },
+            { value: 'sample-video3.mp4', label: 'Episode 3: The Final Showdown', thumbnail: 'thumbnail3.jpg' },
+        ];
+
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoSource = document.getElementById('videoSource');
+        const episodeList = document.getElementById('episodeList');
+        const ratingStars = document.getElementById('ratingStars');
+        const currentRatingText = document.getElementById('currentRating');
+
+        // Populate episode list dynamically
+        episodes.forEach(episode => {
+            const episodeItem = document.createElement('div');
+            episodeItem.classList.add('flex', 'items-center', 'space-x-4', 'p-2', 'border', 'rounded-lg', 'cursor-pointer', 'hover:bg-gray-100');
+
+            const thumbnail = document.createElement('img');
+            thumbnail.src = episode.thumbnail; // Replace with actual thumbnail paths
+            thumbnail.alt = episode.label;
+            thumbnail.classList.add('w-16', 'h-16', 'rounded-lg');
+
+            const episodeDetails = document.createElement('div');
+            episodeDetails.textContent = episode.label;
+
+            episodeItem.appendChild(thumbnail);
+            episodeItem.appendChild(episodeDetails);
+
+            episodeList.appendChild(episodeItem);
+
+            // Add click event to play the selected video
+            episodeItem.addEventListener('click', () => {
+                videoSource.src = episode.value;
+                videoPlayer.load();
+                videoPlayer.play();
+                resetRating(); // Reset the rating when switching episodes
+            });
+        });
+
+        // Rating system functionality
+        let currentRating = 0;
+
+        const resetRating = () => {
+            currentRating = 0;
+            Array.from(ratingStars.children).forEach(star => {
+                star.classList.remove('text-yellow-500');
+                star.classList.add('text-gray-400');
+            });
+            currentRatingText.textContent = 'No rating yet.';
+        };
+
+        ratingStars.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                currentRating = parseInt(event.target.dataset.rating, 10);
+
+                // Update the stars' appearance
+                Array.from(ratingStars.children).forEach(star => {
+                    if (parseInt(star.dataset.rating, 10) <= currentRating) {
+                        star.classList.remove('text-gray-400');
+                        star.classList.add('text-yellow-500');
+                    } else {
+                        star.classList.remove('text-yellow-500');
+                        star.classList.add('text-gray-400');
+                    }
+                });
+
+                // Update the current rating text
+                currentRatingText.textContent = `You rated this episode ${currentRating} star${currentRating > 1 ? 's' : ''}.`;
+            }
+        });
+
+        // Comment Section Functionality
+        const commentInput = document.getElementById('commentInput');
+        const postCommentButton = document.getElementById('postCommentButton');
+        const commentsSection = document.getElementById('commentsSection');
+
+        postCommentButton.addEventListener('click', () => {
+            const commentText = commentInput.value.trim();
+
+            if (commentText) {
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('p-4', 'bg-gray-100', 'rounded-lg');
+
+                const userName = document.createElement('p');
+                userName.classList.add('font-semibold');
+                userName.textContent = 'Anonymous';
+
+                const commentContent = document.createElement('p');
+                commentContent.textContent = commentText;
+
+                commentDiv.appendChild(userName);
+                commentDiv.appendChild(commentContent);
+                commentsSection.appendChild(commentDiv);
+
+                commentInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
